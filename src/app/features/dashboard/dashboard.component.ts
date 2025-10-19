@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { MaterialModule } from "../../material.module";
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  standalone:true,
+  standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  imports: [MaterialModule,CommonModule]
+  imports: [MaterialModule, CommonModule, RouterModule]
 })
 export class DashboardComponent implements OnInit {
   stats = {
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit {
   recentInvoices: any[] = [];
   isLoading = true;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router,) { }
 
   ngOnInit(): void {
     this.loadDashboardData();
@@ -77,22 +78,37 @@ export class DashboardComponent implements OnInit {
     */
   }
 
+  
+  // getStatusColor(status: string): string {
+  //   switch (status.toLowerCase()) {
+  //     case 'scheduled':
+  //       return 'primary';
+  //     case 'completed':
+  //       return 'accent';
+  //     case 'cancelled':
+  //       return 'warn';
+  //     case 'paid':
+  //       return 'accent';
+  //     case 'pending':
+  //       return 'primary';
+  //     case 'overdue':
+  //       return 'warn';
+  //     default:
+  //       return '';
+  //   }
+  // }
+
   getStatusColor(status: string): string {
-    switch (status.toLowerCase()) {
-      case 'scheduled':
-        return 'primary';
-      case 'completed':
-        return 'accent';
-      case 'cancelled':
-        return 'warn';
-      case 'paid':
-        return 'accent';
-      case 'pending':
-        return 'primary';
-      case 'overdue':
-        return 'warn';
-      default:
-        return '';
-    }
+  switch (status.toLowerCase()) {
+    case 'scheduled': return '#1968adff';
+    case 'completed': return '#118817ff';
+    case 'cancelled': return '#e3120eff';
+    case 'paid': return '#081566ff';
+    case 'pending': return '#dc18b1ff';
+    case 'overdue': return '#d78808ff';
+    default: return '#333';
   }
+}
+
+
 }

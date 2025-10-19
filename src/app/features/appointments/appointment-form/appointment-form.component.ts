@@ -5,13 +5,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-appointment-form',
   standalone:true,
   templateUrl: './appointment-form.component.html',
   styleUrls: ['./appointment-form.component.scss'],
-  imports:[MaterialModule,FormsModule,CommonModule,ReactiveFormsModule]
+  imports:[MaterialModule,FormsModule,CommonModule,ReactiveFormsModule,NgxMatTimepickerModule,MatAutocompleteModule]
 })
 export class AppointmentFormComponent implements OnInit {
   appointmentForm!: FormGroup;
@@ -19,6 +23,9 @@ export class AppointmentFormComponent implements OnInit {
   appointmentId: number | null = null;
   isLoading = false;
   patients: any[] = [];
+
+
+
   appointmentTypes = [
     'Check-up',
     'Consultation',
@@ -38,12 +45,16 @@ export class AppointmentFormComponent implements OnInit {
     'No Show'
   ];
 
+  
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
   ) { }
+
+  
 
   ngOnInit(): void {
     this.initializeForm();
@@ -160,12 +171,15 @@ export class AppointmentFormComponent implements OnInit {
     });
   }
 
-  getPatientFullName(patientId: number): string {
-    const patient = this.patients.find(p => p.id === patientId);
-    return patient ? `${patient.firstName} ${patient.lastName}` : '';
-  }
+  // getPatientFullName(patientId: number): string {
+  //   const patient = this.patients.find(p => p.id === patientId);
+  //   return patient ? `${patient.firstName} ${patient.lastName}` : '';
+  // }
 
   cancel(): void {
     this.router.navigate(['/appointments']);
   }
+
+   
+
 }

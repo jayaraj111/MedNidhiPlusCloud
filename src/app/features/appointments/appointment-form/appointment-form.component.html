@@ -1,7 +1,7 @@
 <div class="appointment-form-container">
   <div class="appointment-form-header">
     <h1 class="mat-headline-4">{{ isEditMode ? 'Edit' : 'New' }} Appointment</h1>
-    <button mat-button color="primary" routerLink="/appointments">
+    <button mat-button color="primary" (click)="cancel()">
       <mat-icon>arrow_back</mat-icon> Back to Appointments
     </button>
   </div>
@@ -26,6 +26,9 @@
             </mat-error>
           </mat-form-field>
 
+       
+
+
           <mat-form-field appearance="outline">
             <mat-label>Doctor</mat-label>
             <input matInput formControlName="doctorName" required>
@@ -46,13 +49,28 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field appearance="outline">
             <mat-label>Time</mat-label>
             <input matInput formControlName="appointmentTime" required placeholder="e.g. 09:00 AM">
             <mat-error *ngIf="appointmentForm.get('appointmentTime')?.hasError('required')">
               Time is required
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
+
+         <mat-form-field appearance="outline">
+    <mat-label>Appointment Time</mat-label>
+    <input matInput [ngxMatTimepicker]="timePicker" formControlName="appointmentTime"  readonly required>
+    <ngx-mat-timepicker #timePicker  ></ngx-mat-timepicker>
+    <mat-error *ngIf="appointmentForm.get('appointmentTime')?.hasError('required')">
+              Time is required
+            </mat-error>
+  </mat-form-field>
+
+ 
+
+
+          
+
         </div>
 
         <div class="form-row">
@@ -85,7 +103,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Fee</mat-label>
             <input matInput type="number" formControlName="fee" required>
-            <span matPrefix>$&nbsp;</span>
+            <span matPrefix>&nbsp;&#8377;&nbsp;</span>
             <mat-error *ngIf="appointmentForm.get('fee')?.hasError('required')">
               Fee is required
             </mat-error>

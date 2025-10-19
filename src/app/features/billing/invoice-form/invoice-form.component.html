@@ -1,7 +1,7 @@
 <div class="invoice-form-container">
   <div class="invoice-form-header">
     <h1 class="mat-headline-4">{{ isEditMode ? 'Edit' : 'New' }} Invoice</h1>
-    <button mat-button color="primary" routerLink="/billing">
+    <button mat-button color="primary" (click)="cancel()">
       <mat-icon>arrow_back</mat-icon> Back to Invoices
     </button>
   </div>
@@ -115,7 +115,7 @@
               <mat-form-field appearance="outline">
                 <mat-label>Unit Price</mat-label>
                 <input matInput type="number" formControlName="unitPrice" required (blur)="onItemValueChange(i)">
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
                 <mat-error *ngIf="invoiceItems.at(i).get('unitPrice')?.hasError('required')">
                   Unit price is required
                 </mat-error>
@@ -138,7 +138,7 @@
               <mat-form-field appearance="outline">
                 <mat-label>Discount</mat-label>
                 <input matInput type="number" formControlName="discount" (blur)="onItemValueChange(i)">
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
                 <mat-error *ngIf="invoiceItems.at(i).get('discount')?.hasError('min')">
                   Discount cannot be negative
                 </mat-error>
@@ -161,13 +161,13 @@
               <mat-form-field appearance="outline">
                 <mat-label>Tax Amount</mat-label>
                 <input matInput type="number" formControlName="taxAmount" readonly>
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
               </mat-form-field>
 
               <mat-form-field appearance="outline">
                 <mat-label>Total Amount</mat-label>
                 <input matInput type="number" formControlName="totalAmount" readonly>
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
               </mat-form-field>
             </div>
           </div>
@@ -190,7 +190,7 @@
             <div class="total-value">
               <mat-form-field appearance="outline">
                 <input matInput type="number" formControlName="subTotal" readonly>
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
               </mat-form-field>
             </div>
           </div>
@@ -200,7 +200,7 @@
             <div class="total-value">
               <mat-form-field appearance="outline">
                 <input matInput type="number" formControlName="taxAmount" readonly>
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
               </mat-form-field>
             </div>
           </div>
@@ -210,7 +210,7 @@
             <div class="total-value">
               <mat-form-field appearance="outline">
                 <input matInput type="number" formControlName="totalAmount" readonly>
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
               </mat-form-field>
             </div>
           </div>
@@ -220,7 +220,7 @@
             <div class="total-value">
               <mat-form-field appearance="outline">
                 <input matInput type="number" formControlName="paidAmount">
-                <span matPrefix>$&nbsp;</span>
+                <span matPrefix>&nbsp;&#8377;&nbsp;</span>
               </mat-form-field>
             </div>
           </div>

@@ -45,80 +45,91 @@
       <mat-spinner></mat-spinner>
     </div>
 
-    <table mat-table [dataSource]="dataSource" matSort *ngIf="!isLoading">
-      <!-- ID Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-        <td mat-cell *matCellDef="let appointment"> {{ appointment.id }} </td>
-      </ng-container>
+    <div class="mat-elevation-z8 table-container table-responsive">
 
-      <!-- Date Column -->
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td mat-cell *matCellDef="let appointment"> {{ appointment.date | date:'MMM d, y' }} </td>
-      </ng-container>
+      <table mat-table [dataSource]="dataSource" matSort *ngIf="!isLoading">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let appointment"> {{ appointment.id }} </td>
+        </ng-container>
 
-      <!-- Time Column -->
-      <ng-container matColumnDef="time">
-        <th mat-header-cell *matHeaderCellDef> Time </th>
-        <td mat-cell *matCellDef="let appointment"> {{ appointment.time }} </td>
-      </ng-container>
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let appointment"> {{ appointment.date | date:'MMM d, y' }} </td>
+        </ng-container>
 
-      <!-- Patient Name Column -->
-      <ng-container matColumnDef="patientName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient </th>
-        <td mat-cell *matCellDef="let appointment"> 
-          <a [routerLink]="['/patients', appointment.patientId]">{{ appointment.patientName }}</a>
-        </td>
-      </ng-container>
+        <!-- Time Column -->
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> Time </th>
+          <td mat-cell *matCellDef="let appointment"> {{ appointment.time }} </td>
+        </ng-container>
 
-      <!-- Type Column -->
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-        <td mat-cell *matCellDef="let appointment"> {{ appointment.type }} </td>
-      </ng-container>
+        <!-- Patient Name Column -->
+        <ng-container matColumnDef="patientName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient </th>
+          <td mat-cell *matCellDef="let appointment">
+            <a [routerLink]="['/patients', appointment.patientId]">{{ appointment.patientName }}</a>
+          </td>
+        </ng-container>
 
-      <!-- Doctor Column -->
-      <ng-container matColumnDef="doctor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctor </th>
-        <td mat-cell *matCellDef="let appointment"> {{ appointment.doctor }} </td>
-      </ng-container>
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+          <td mat-cell *matCellDef="let appointment"> {{ appointment.type }} </td>
+        </ng-container>
 
-      <!-- Status Column -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let appointment"> 
-          <mat-chip [color]="getStatusColor(appointment.status)" selected>
-            {{ appointment.status }}
-          </mat-chip>
-        </td>
-      </ng-container>
+        <!-- Doctor Column -->
+        <ng-container matColumnDef="doctor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctor </th>
+          <td mat-cell *matCellDef="let appointment"> {{ appointment.doctor }} </td>
+        </ng-container>
 
-      <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let appointment">
-          <button mat-icon-button [routerLink]="['/appointments', appointment.id]" matTooltip="View Details">
-            <mat-icon>visibility</mat-icon>
-          </button>
-          <button mat-icon-button [routerLink]="['/appointments', appointment.id, 'edit']" matTooltip="Edit">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button (click)="deleteAppointment(appointment.id)" matTooltip="Delete">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let appointment">
+            <!-- <mat-chip [color]="getStatusColor(appointment.status)" selected>
+              {{ appointment.status }}
+            </mat-chip> -->
+             <mat-chip #chip>
+                <span class="mat-chip-content" [style.color]="getStatusColor(appointment.status)">
+                  {{ appointment.status }}
+                </span>
+              </mat-chip>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let appointment">
+            <button mat-icon-button [routerLink]="['/appointments', appointment.id]" matTooltip="View Details">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" [routerLink]="['/appointments', appointment.id, 'edit']" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteAppointment(appointment.id)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <!-- Row shown when there is no matching data. -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="8">No appointments matching the filter</td>
-      </tr>
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="8">No appointments matching the filter</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+
+    </div>
+
+    
   </div>
 </div>

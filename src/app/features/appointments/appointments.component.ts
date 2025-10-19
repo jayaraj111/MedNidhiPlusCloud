@@ -143,20 +143,32 @@ export class AppointmentsComponent implements OnInit {
     }
   }
 
-  getStatusColor(status: string): string {
-    switch (status.toLowerCase()) {
-      case 'completed':
-        return 'primary';
-      case 'scheduled':
-        return 'accent';
-      case 'in progress':
-        return 'warn';
-      case 'cancelled':
-        return '';
-      default:
-        return '';
-    }
+  // getStatusColor(status: string): string {
+  //   switch (status.toLowerCase()) {
+  //     case 'completed':
+  //       return 'primary';
+  //     case 'scheduled':
+  //       return 'accent';
+  //     case 'in progress':
+  //       return 'warn';
+  //     case 'cancelled':
+  //       return '';
+  //     default:
+  //       return '';
+  //   }
+  // }
+
+    getStatusColor(status: string): string {
+  switch (status.toLowerCase()) {
+    case 'scheduled': return '#1968adff';
+    case 'completed': return '#118817ff';
+    case 'cancelled': return '#e3120eff';
+    case 'in progress': return '#081566ff';
+    case 'pending': return '#dc18b1ff';
+    case 'overdue': return '#d78808ff';
+    default: return '#333';
   }
+}
 
   deleteAppointment(id: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

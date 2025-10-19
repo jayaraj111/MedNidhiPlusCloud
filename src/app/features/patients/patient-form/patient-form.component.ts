@@ -33,7 +33,6 @@ export class PatientFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     
-    // Check if we're in edit mode
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
@@ -64,10 +63,6 @@ export class PatientFormComponent implements OnInit {
   loadPatientData(id: number): void {
     this.isLoading = true;
 
-    // In a real application, this would be an API call to the backend
-    // For now, we'll simulate the data
-
-    // Simulate API call delay
     setTimeout(() => {
       const patient = {
         id: id,
@@ -89,22 +84,6 @@ export class PatientFormComponent implements OnInit {
       this.isLoading = false;
     }, 1000);
 
-    // In a real application, we would make an HTTP request to the backend API
-    // Example:
-    /*
-    this.http.get<any>(`${environment.apiUrl}/patients/${id}`).subscribe(
-      (data) => {
-        this.patientForm.patchValue(data);
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Error fetching patient:', error);
-        this.snackBar.open('Error loading patient data', 'Close', { duration: 3000 });
-        this.isLoading = false;
-        this.router.navigate(['/patients']);
-      }
-    );
-    */
   }
 
   onSubmit(): void {
@@ -115,10 +94,6 @@ export class PatientFormComponent implements OnInit {
     this.isLoading = true;
     const patientData = this.patientForm.value;
 
-    // In a real application, this would be an API call to the backend
-    // For now, we'll simulate the API response
-
-    // Simulate API call delay
     setTimeout(() => {
       this.isLoading = false;
       this.snackBar.open(
@@ -128,38 +103,6 @@ export class PatientFormComponent implements OnInit {
       );
       this.router.navigate(['/patients']);
     }, 1000);
-
-    // In a real application, we would make an HTTP request to the backend API
-    // Example:
-    /*
-    if (this.isEditMode && this.patientId) {
-      this.http.put(`${environment.apiUrl}/patients/${this.patientId}`, patientData).subscribe(
-        () => {
-          this.isLoading = false;
-          this.snackBar.open('Patient updated successfully', 'Close', { duration: 3000 });
-          this.router.navigate(['/patients']);
-        },
-        (error) => {
-          console.error('Error updating patient:', error);
-          this.snackBar.open('Error updating patient', 'Close', { duration: 3000 });
-          this.isLoading = false;
-        }
-      );
-    } else {
-      this.http.post(`${environment.apiUrl}/patients`, patientData).subscribe(
-        () => {
-          this.isLoading = false;
-          this.snackBar.open('Patient created successfully', 'Close', { duration: 3000 });
-          this.router.navigate(['/patients']);
-        },
-        (error) => {
-          console.error('Error creating patient:', error);
-          this.snackBar.open('Error creating patient', 'Close', { duration: 3000 });
-          this.isLoading = false;
-        }
-      );
-    }
-    */
   }
 
   cancel(): void {

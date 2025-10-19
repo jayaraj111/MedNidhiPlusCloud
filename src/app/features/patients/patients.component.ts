@@ -9,6 +9,7 @@ import { ConfirmDialogComponent } from '../../shared/components/confirm-dialog/c
 import { MaterialModule } from "../../material.module";
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PatientService } from '../../../services/patient.service';
 
 interface Patient {
   id: number;
@@ -21,15 +22,16 @@ interface Patient {
 
 @Component({
   selector: 'app-patients',
-  standalone:true,
+  standalone: true,
   templateUrl: './patients.component.html',
   styleUrls: ['./patients.component.scss'],
-  imports: [MaterialModule,RouterModule,CommonModule]
+  imports: [MaterialModule, RouterModule, CommonModule]
 })
 export class PatientsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'phoneNumber', 'email', 'dateOfBirth', 'actions'];
   dataSource = new MatTableDataSource<Patient>([]);
   isLoading = true;
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -37,7 +39,8 @@ export class PatientsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private patientService: PatientService
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +52,7 @@ export class PatientsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -76,7 +79,7 @@ export class PatientsComponent implements OnInit {
     }, 1000);
   }
 
-  deletePatient(id: number) {
+ deletePatient(id: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: { 

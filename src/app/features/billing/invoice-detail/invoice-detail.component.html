@@ -115,13 +115,13 @@
 
           <ng-container matColumnDef="unitPrice">
             <th mat-header-cell *matHeaderCellDef>Unit Price</th>
-            <td mat-cell *matCellDef="let item">${{ item.unitPrice.toFixed(2) }}</td>
+            <td mat-cell *matCellDef="let item">&nbsp;&#8377;&nbsp;{{ item.unitPrice.toFixed(2) }}</td>
             <td mat-footer-cell *matFooterCellDef></td>
           </ng-container>
 
           <ng-container matColumnDef="discount">
             <th mat-header-cell *matHeaderCellDef>Discount</th>
-            <td mat-cell *matCellDef="let item">${{ item.discount.toFixed(2) }}</td>
+            <td mat-cell *matCellDef="let item">&nbsp;&#8377;&nbsp;{{ item.discount.toFixed(2) }}</td>
             <td mat-footer-cell *matFooterCellDef></td>
           </ng-container>
 
@@ -134,13 +134,13 @@
           <ng-container matColumnDef="taxAmount">
             <th mat-header-cell *matHeaderCellDef>Tax Amount</th>
             <td mat-cell *matCellDef="let item">${{ item.taxAmount.toFixed(2) }}</td>
-            <td mat-footer-cell *matFooterCellDef><strong>${{ invoice.taxAmount.toFixed(2) }}</strong></td>
+            <td mat-footer-cell *matFooterCellDef><strong>&nbsp;&#8377;&nbsp;{{ invoice.taxAmount.toFixed(2) }}</strong></td>
           </ng-container>
 
           <ng-container matColumnDef="totalAmount">
             <th mat-header-cell *matHeaderCellDef>Total</th>
             <td mat-cell *matCellDef="let item">${{ item.totalAmount.toFixed(2) }}</td>
-            <td mat-footer-cell *matFooterCellDef><strong>${{ invoice.totalAmount.toFixed(2) }}</strong></td>
+            <td mat-footer-cell *matFooterCellDef><strong>&nbsp;&#8377;&nbsp;{{ invoice.totalAmount.toFixed(2) }}</strong></td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -159,19 +159,19 @@
           <div class="summary-grid">
             <div class="summary-row">
               <div class="summary-label">Subtotal:</div>
-              <div class="summary-value">${{ invoice.subTotal.toFixed(2) }}</div>
+              <div class="summary-value">&nbsp;&#8377;&nbsp;{{ invoice.subTotal.toFixed(2) }}</div>
             </div>
             <div class="summary-row">
               <div class="summary-label">Tax Amount:</div>
-              <div class="summary-value">${{ invoice.taxAmount.toFixed(2) }}</div>
+              <div class="summary-value">&nbsp;&#8377;&nbsp;{{ invoice.taxAmount.toFixed(2) }}</div>
             </div>
             <div class="summary-row total-row">
               <div class="summary-label">Total Amount:</div>
-              <div class="summary-value">${{ invoice.totalAmount.toFixed(2) }}</div>
+              <div class="summary-value">&nbsp;&#8377;&nbsp;{{ invoice.totalAmount.toFixed(2) }}</div>
             </div>
             <div class="summary-row" *ngIf="invoice.paidAmount > 0">
               <div class="summary-label">Paid Amount:</div>
-              <div class="summary-value">${{ invoice.paidAmount.toFixed(2) }}</div>
+              <div class="summary-value">&nbsp;&#8377;&nbsp;{{ invoice.paidAmount.toFixed(2) }}</div>
             </div>
             <div class="summary-row" *ngIf="invoice.paidAmount > 0">
               <div class="summary-label">Payment Date:</div>
@@ -183,7 +183,7 @@
             </div>
             <div class="summary-row balance-row" *ngIf="invoice.status !== 'Paid'">
               <div class="summary-label">Balance Due:</div>
-              <div class="summary-value">${{ calculateBalance().toFixed(2) }}</div>
+              <div class="summary-value">&nbsp;&#8377;&nbsp;{{ calculateBalance().toFixed(2) }}</div>
             </div>
           </div>
         </mat-card-content>

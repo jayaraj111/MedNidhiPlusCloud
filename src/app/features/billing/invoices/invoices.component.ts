@@ -152,20 +152,32 @@ export class InvoicesComponent implements OnInit {
     }
   }
 
+  // getStatusColor(status: string): string {
+  //   switch (status.toLowerCase()) {
+  //     case 'paid':
+  //       return 'primary';
+  //     case 'pending':
+  //       return 'accent';
+  //     case 'overdue':
+  //       return 'warn';
+  //     case 'cancelled':
+  //       return '';
+  //     default:
+  //       return '';
+  //   }
+  // }
+
   getStatusColor(status: string): string {
-    switch (status.toLowerCase()) {
-      case 'paid':
-        return 'primary';
-      case 'pending':
-        return 'accent';
-      case 'overdue':
-        return 'warn';
-      case 'cancelled':
-        return '';
-      default:
-        return '';
-    }
+  switch (status.toLowerCase()) {
+    case 'scheduled': return '#1968adff';
+    case 'completed': return '#118817ff';
+    case 'cancelled': return '#e3120eff';
+    case 'paid': return '#081566ff';
+    case 'pending': return '#dc18b1ff';
+    case 'overdue': return '#d78808ff';
+    default: return '#333';
   }
+}
 
   deleteInvoice(id: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
