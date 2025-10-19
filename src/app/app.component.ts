@@ -17,7 +17,7 @@ import { MyProfileComponent } from './features/user-profile/my-profile/my-profil
   imports: [MaterialModule, RouterModule, CommonModule]
 })
 export class AppComponent {
-  title = 'Clinic Billing System';
+  title = 'MedNidhi +';
   userData: any = null;
   username!: string | null;
   readonly dialog = inject(MatDialog);
