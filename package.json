@@ -1,14 +1,16 @@
 {
   "name": "clinic-frontend",
   "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:clinic-frontend": "node dist/clinic-frontend/server/server.mjs"
-  },
+"scripts": {
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build --base-href https://jayaraj111.github.io/MedNidhiPlusCloud/",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "serve:ssr:clinic-frontend": "node dist/clinic-frontend/server/server.mjs",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist/clinic-frontend"
+},
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.14",
