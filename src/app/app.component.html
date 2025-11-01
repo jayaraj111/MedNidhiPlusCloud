@@ -78,6 +78,11 @@
           <span>Change Password</span>
         </button>
 
+          <button mat-menu-item (click)="openChangePassword($event)">
+          <mat-icon style="color: grey;">badge</mat-icon>
+          <span>User Management</span>
+        </button>
+
         <button mat-menu-item (click)="onLogOut($event)">
           <mat-icon style="color: grey;">logout</mat-icon>
           <span>Logout</span>
